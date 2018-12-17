@@ -1,0 +1,1021 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BNB</name>
+    </assembly>
+    <members>
+        <member name="M:BNB.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Generates an URI-friendly ID for the <see cref="T:System.Web.Http.Description.ApiDescription"/>. E.g. "Get-Values-id_name" instead of "GetValues/{id}?name={name}"
+            </summary>
+            <param name="description">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The ID as a string.</returns>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.HelpPageConfig">
+            <summary>
+            Use this class to customize the Help Page.
+            For example you can set a custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> to supply the documentation
+            or you can provide the samples for the requests/responses.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.Controllers.HelpController">
+            <summary>
+            The controller that will handle requests for the help page.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetDocumentationProvider(System.Web.Http.HttpConfiguration,System.Web.Http.Description.IDocumentationProvider)">
+            <summary>
+            Sets the documentation provider for help page.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="documentationProvider">The documentation provider.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleObjects(System.Web.Http.HttpConfiguration,System.Collections.Generic.IDictionary{System.Type,System.Object})">
+            <summary>
+            Sets the objects that will be used by the formatters to produce sample requests/responses.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleObjects">The sample objects.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type and action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleRequest(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample request directly for the specified media type and action with parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample request.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String)">
+            <summary>
+            Sets the sample request directly for the specified media type of the action.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleResponse(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.String,System.String,System.String[])">
+            <summary>
+            Sets the sample response directly for the specified media type of the action with specific parameters.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample response.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForMediaType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Sets the sample directly for all actions with the specified media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetSampleForType(System.Web.Http.HttpConfiguration,System.Object,System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Sets the sample directly for all actions with the specified type and media type.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sample">The sample.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The parameter type or return type of an action.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualRequestType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate request samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String)">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetActualResponseType(System.Web.Http.HttpConfiguration,System.Type,System.String,System.String,System.String[])">
+            <summary>
+            Specifies the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> returned as part of the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            The help page will use this information to produce more accurate response samples.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="type">The type.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <returns>The help page sample generator.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.SetHelpPageSampleGenerator(System.Web.Http.HttpConfiguration,BNB.Areas.HelpPage.HelpPageSampleGenerator)">
+            <summary>
+            Sets the help page sample generator.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="sampleGenerator">The help page sample generator.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.GetModelDescriptionGenerator(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Gets the model description generator.
+            </summary>
+            <param name="config">The configuration.</param>
+            <returns>The <see cref="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator"/></returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageConfigurationExtensions.GetHelpPageApiModel(System.Web.Http.HttpConfiguration,System.String)">
+            <summary>
+            Gets the model that represents an API displayed on the help page. The model is initialized on the first call and cached for subsequent calls.
+            </summary>
+            <param name="config">The <see cref="T:System.Web.Http.HttpConfiguration"/>.</param>
+            <param name="apiDescriptionId">The <see cref="T:System.Web.Http.Description.ApiDescription"/> ID.</param>
+            <returns>
+            An <see cref="T:BNB.Areas.HelpPage.Models.HelpPageApiModel"/>
+            </returns>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescription">
+            <summary>
+            Describes a type model.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescriptionGenerator">
+            <summary>
+            Generates model descriptions for given types.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.ModelDescriptions.ModelNameAttribute">
+            <summary>
+            Use this attribute to change the name of the <see cref="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescription"/> generated for a type.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.Models.HelpPageApiModel">
+            <summary>
+            The model that represents an API displayed on the help page.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.Models.HelpPageApiModel.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BNB.Areas.HelpPage.Models.HelpPageApiModel"/> class.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription">
+            <summary>
+            Gets or sets the <see cref="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.ApiDescription"/> that describes the API.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.UriParameters">
+            <summary>
+            Gets or sets the <see cref="T:BNB.Areas.HelpPage.ModelDescriptions.ParameterDescription"/> collection that describes the URI parameters for the API.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.RequestDocumentation">
+            <summary>
+            Gets or sets the documentation for the request.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.RequestModelDescription">
+            <summary>
+            Gets or sets the <see cref="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the request body.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.RequestBodyParameters">
+            <summary>
+            Gets the request body parameter descriptions.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.ResourceDescription">
+            <summary>
+            Gets or sets the <see cref="T:BNB.Areas.HelpPage.ModelDescriptions.ModelDescription"/> that describes the resource.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.ResourceProperties">
+            <summary>
+            Gets the resource property descriptions.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.SampleRequests">
+            <summary>
+            Gets the sample requests associated with the API.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.SampleResponses">
+            <summary>
+            Gets the sample responses associated with the API.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.Models.HelpPageApiModel.ErrorMessages">
+            <summary>
+            Gets the error messages associated with this model.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.HelpPageSampleGenerator">
+            <summary>
+            This class will generate the samples for the help page.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:BNB.Areas.HelpPage.HelpPageSampleGenerator"/> class.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.ActualHttpMessageTypes">
+            <summary>
+            Gets CLR types that are used as the content of <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/>.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples">
+            <summary>
+            Gets the objects that are used directly as samples for certain actions.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects">
+            <summary>
+            Gets the objects that are serialized as samples by the supported formatters.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories">
+            <summary>
+            Gets factories for the objects that the supported formatters will serialize as samples. Processed in order,
+            stopping when the factory successfully returns a non-<see langref="null"/> object.
+            </summary>
+            <remarks>
+            Collection includes just <see cref="M:BNB.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)"/> initially. Use
+            <code>SampleObjectFactories.Insert(0, func)</code> to provide an override and
+            <code>SampleObjectFactories.Add(func)</code> to provide a fallback.</remarks>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.GetSampleRequests(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the request body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.GetSampleResponses(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Gets the response body samples for a given <see cref="T:System.Web.Http.Description.ApiDescription"/>.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.GetSample(System.Web.Http.Description.ApiDescription,BNB.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Gets the request or response body samples.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The samples keyed by media type.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.GetActionSample(System.String,System.String,System.Collections.Generic.IEnumerable{System.String},System.Type,System.Net.Http.Formatting.MediaTypeFormatter,System.Net.Http.Headers.MediaTypeHeaderValue,BNB.Areas.HelpPage.SampleDirection)">
+            <summary>
+            Search for samples that are provided directly through <see cref="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.ActionSamples"/>.
+            </summary>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="type">The CLR type.</param>
+            <param name="formatter">The formatter.</param>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or for a response.</param>
+            <returns>The sample that matches the parameters.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.GetSampleObject(System.Type)">
+            <summary>
+            Gets the sample object that will be serialized by the formatters. 
+            First, it will look at the <see cref="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.SampleObjects"/>. If no sample object is found, it will try to create
+            one using <see cref="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.DefaultSampleObjectFactory(BNB.Areas.HelpPage.HelpPageSampleGenerator,System.Type)"/> (which wraps an <see cref="T:BNB.Areas.HelpPage.ObjectGenerator"/>) and other
+            factories in <see cref="P:BNB.Areas.HelpPage.HelpPageSampleGenerator.SampleObjectFactories"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>The sample object.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.ResolveHttpRequestMessageType(System.Web.Http.Description.ApiDescription)">
+            <summary>
+            Resolves the actual type of <see cref="T:System.Net.Http.ObjectContent`1"/> passed to the <see cref="T:System.Net.Http.HttpRequestMessage"/> in an action.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <returns>The type.</returns>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.ResolveType(System.Web.Http.Description.ApiDescription,System.String,System.String,System.Collections.Generic.IEnumerable{System.String},BNB.Areas.HelpPage.SampleDirection,System.Collections.ObjectModel.Collection{System.Net.Http.Formatting.MediaTypeFormatter}@)">
+            <summary>
+            Resolves the type of the action parameter or return value when <see cref="T:System.Net.Http.HttpRequestMessage"/> or <see cref="T:System.Net.Http.HttpResponseMessage"/> is used.
+            </summary>
+            <param name="api">The <see cref="T:System.Web.Http.Description.ApiDescription"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+            <param name="sampleDirection">The value indicating whether the sample is for a request or a response.</param>
+            <param name="formatters">The formatters.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleGenerator.WriteSampleObjectUsingFormatter(System.Net.Http.Formatting.MediaTypeFormatter,System.Object,System.Type,System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Writes the sample object using formatter.
+            </summary>
+            <param name="formatter">The formatter.</param>
+            <param name="value">The value.</param>
+            <param name="type">The type.</param>
+            <param name="mediaType">Type of the media.</param>
+            <returns></returns>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.HelpPageSampleKey">
+            <summary>
+            This is used to identify the place where the sample should be applied.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue)">
+            <summary>
+            Creates a new <see cref="T:BNB.Areas.HelpPage.HelpPageSampleKey"/> based on media type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,System.Type)">
+            <summary>
+            Creates a new <see cref="T:BNB.Areas.HelpPage.HelpPageSampleKey"/> based on media type and CLR type.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="type">The CLR type.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleKey.#ctor(BNB.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BNB.Areas.HelpPage.HelpPageSampleKey"/> based on <see cref="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="sampleDirection">The <see cref="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.HelpPageSampleKey.#ctor(System.Net.Http.Headers.MediaTypeHeaderValue,BNB.Areas.HelpPage.SampleDirection,System.String,System.String,System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Creates a new <see cref="T:BNB.Areas.HelpPage.HelpPageSampleKey"/> based on media type, <see cref="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>, controller name, action name and parameter names.
+            </summary>
+            <param name="mediaType">The media type.</param>
+            <param name="sampleDirection">The <see cref="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.</param>
+            <param name="controllerName">Name of the controller.</param>
+            <param name="actionName">Name of the action.</param>
+            <param name="parameterNames">The parameter names.</param>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleKey.ControllerName">
+            <summary>
+            Gets the name of the controller.
+            </summary>
+            <value>
+            The name of the controller.
+            </value>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleKey.ActionName">
+            <summary>
+            Gets the name of the action.
+            </summary>
+            <value>
+            The name of the action.
+            </value>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleKey.MediaType">
+            <summary>
+            Gets the media type.
+            </summary>
+            <value>
+            The media type.
+            </value>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleKey.ParameterNames">
+            <summary>
+            Gets the parameter names.
+            </summary>
+        </member>
+        <member name="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection">
+            <summary>
+            Gets the <see cref="P:BNB.Areas.HelpPage.HelpPageSampleKey.SampleDirection"/>.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.ImageSample">
+            <summary>
+            This represents an image sample on the help page. There's a display template named ImageSample associated with this class.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.ImageSample.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BNB.Areas.HelpPage.ImageSample"/> class.
+            </summary>
+            <param name="src">The URL of an image.</param>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.InvalidSample">
+            <summary>
+            This represents an invalid sample on the help page. There's a display template named InvalidSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.ObjectGenerator">
+            <summary>
+            This class will create an object of a given type and populate it with sample data.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.ObjectGenerator.GenerateObject(System.Type)">
+            <summary>
+            Generates an object for a given type. The type needs to be public, have a public default constructor and settable public properties/fields. Currently it supports the following types:
+            Simple types: <see cref="T:System.Int32"/>, <see cref="T:System.String"/>, <see cref="T:System.Enum"/>, <see cref="T:System.DateTime"/>, <see cref="T:System.Uri"/>, etc.
+            Complex types: POCO types.
+            Nullables: <see cref="T:System.Nullable`1"/>.
+            Arrays: arrays of simple types or complex types.
+            Key value pairs: <see cref="T:System.Collections.Generic.KeyValuePair`2"/>
+            Tuples: <see cref="T:System.Tuple`1"/>, <see cref="T:System.Tuple`2"/>, etc
+            Dictionaries: <see cref="T:System.Collections.Generic.IDictionary`2"/> or anything deriving from <see cref="T:System.Collections.Generic.IDictionary`2"/>.
+            Collections: <see cref="T:System.Collections.Generic.IList`1"/>, <see cref="T:System.Collections.Generic.IEnumerable`1"/>, <see cref="T:System.Collections.Generic.ICollection`1"/>, <see cref="T:System.Collections.IList"/>, <see cref="T:System.Collections.IEnumerable"/>, <see cref="T:System.Collections.ICollection"/> or anything deriving from <see cref="T:System.Collections.Generic.ICollection`1"/> or <see cref="T:System.Collections.IList"/>.
+            Queryables: <see cref="T:System.Linq.IQueryable"/>, <see cref="T:System.Linq.IQueryable`1"/>.
+            </summary>
+            <param name="type">The type.</param>
+            <returns>An object of the given type.</returns>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.SampleDirection">
+            <summary>
+            Indicates whether the sample is used for request or response
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.TextSample">
+            <summary>
+            This represents a preformatted text sample on the help page. There's a display template named TextSample associated with this class.
+            </summary>
+        </member>
+        <member name="T:BNB.Areas.HelpPage.XmlDocumentationProvider">
+            <summary>
+            A custom <see cref="T:System.Web.Http.Description.IDocumentationProvider"/> that reads the API documentation from an XML documentation file.
+            </summary>
+        </member>
+        <member name="M:BNB.Areas.HelpPage.XmlDocumentationProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BNB.Areas.HelpPage.XmlDocumentationProvider"/> class.
+            </summary>
+            <param name="documentPath">The physical path to XML document.</param>
+        </member>
+        <member name="T:BNB.Controllers.HomeController">
+            <summary>
+            Home controller.
+            </summary>
+        </member>
+        <member name="M:BNB.Controllers.HomeController.GetMapMarker">
+            <summary>
+            Get list of existing map markers
+            </summary>
+            <returns>Return jsn model with all sensors</returns>
+            <seealso cref="M:BNB.Controllers.HomeController.AddSensorInfo(BNB.Sensor)">Add new sensor</seealso>
+            <seealso cref="M:BNB.Controllers.HomeController.AddUserFeedback(BNB.Feedback)">Add feedback</seealso>
+        </member>
+        <member name="M:BNB.Controllers.HomeController.AddSensorInfo(BNB.Sensor)">
+            <summary>
+            Insert new sensor info
+            </summary>
+            <returns>Return GUID Key for sensor</returns>
+            <seealso cref="M:BNB.Controllers.HomeController.GetMapMarker">Get all markers</seealso>
+            <seealso cref="M:BNB.Controllers.HomeController.AddUserFeedback(BNB.Feedback)">Add feedback</seealso>
+        </member>
+        <member name="M:BNB.Controllers.HomeController.AddUserFeedback(BNB.Feedback)">
+            <summary>
+            Insert new user feedback
+            </summary>
+            <returns>Return true if received</returns>
+            <seealso cref="M:BNB.Controllers.HomeController.GetMapMarker">All archived data</seealso>
+            <seealso cref="M:BNB.Controllers.HomeController.AddSensorInfo(BNB.Sensor)">Add new sensor</seealso>
+        </member>
+        <member name="M:BNB.Controllers.HomeController.GetMarkersByKeyWord(System.String)">
+            <summary>
+            Get sensors by keyword
+            </summary>
+            <returns>Return sensors</returns>
+            <seealso cref="!:GetMarkers()">Get map markers</seealso>
+            <seealso cref="!:addSensor(Sensor)">Add new sensor</seealso>//////////////////////
+        </member>
+        <member name="M:BNB.Controllers.HomeController.GetSensorByKey(System.String)">
+            <summary>
+            Get sensor by key
+            </summary>
+            <returns>Return sensor</returns>
+            <seealso cref="!:GetMarkers()">Get map markers</seealso>
+            <seealso cref="!:addSensor(Sensor)">Add new sensor</seealso>//////////////////////
+        </member>
+        <member name="T:BNB.Controllers.ValuesController">
+            <summary>
+            Values controller.
+            </summary>
+        </member>
+        <member name="M:BNB.Controllers.ValuesController.GetMarkers">
+            <summary>
+            Get map markers
+            </summary>
+            <returns>Return list of map markers</returns>
+            <seealso cref="M:BNB.Controllers.ValuesController.addNewFeedback(BNB.Feedback)">Add new feedback</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.addSensor(BNB.Sensor)">Add new sensor</seealso>
+        </member>
+        <member name="M:BNB.Controllers.ValuesController.addSensor(BNB.Sensor)">
+            <summary>
+            Insert new sensor info
+            </summary>
+            <returns>Return GUID Key for sensor</returns>
+            <seealso cref="M:BNB.Controllers.ValuesController.GetMarkers">Get all markers</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.addNewFeedback(BNB.Feedback)">Add feedback</seealso>
+        </member>
+        <member name="M:BNB.Controllers.ValuesController.addNewFeedback(BNB.Feedback)">
+            <summary>
+            Insert new user feedback
+            </summary>
+            <returns>Return success or error</returns>
+            <seealso cref="M:BNB.Controllers.ValuesController.GetMarkers">Get map markers</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.addSensor(BNB.Sensor)">Add new sensor</seealso>//////////////////////
+        </member>
+        <member name="M:BNB.Controllers.ValuesController.getByKeyword(System.String)">
+            <summary>
+            Get sensors by keyword
+            </summary>
+            <returns>Return sensors</returns>
+            <seealso cref="M:BNB.Controllers.ValuesController.GetMarkers">Get map markers</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.addSensor(BNB.Sensor)">Add new sensor</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.getSensorByKey(System.String)">Get sensor by key</seealso>
+        </member>
+        <member name="M:BNB.Controllers.ValuesController.getSensorByKey(System.String)">
+            <summary>
+            Get sensor by key
+            </summary>
+            <returns>Return sensor</returns>
+            <seealso cref="M:BNB.Controllers.ValuesController.GetMarkers">Get map markers</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.addSensor(BNB.Sensor)">Add new sensor</seealso>
+            <seealso cref="M:BNB.Controllers.ValuesController.getByKeyword(System.String)">Get sensors by keyword</seealso>
+        </member>
+        <member name="T:BNB.Resources.Resource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.About">
+            <summary>
+              Looks up a localized string similar to About.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AboutAuthor">
+            <summary>
+              Looks up a localized string similar to About author.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AboutUniversity">
+            <summary>
+              Looks up a localized string similar to About university.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AddingNewSensorInfo">
+            <summary>
+              Looks up a localized string similar to Adding new sensor info.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AddSensorError">
+            <summary>
+              Looks up a localized string similar to Error while creating new sensor.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AllFieldsRequired">
+            <summary>
+              Looks up a localized string similar to Fill all required (*) fileds.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ApiMsg">
+            <summary>
+              Looks up a localized string similar to Our API for your projects..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AuthorAddress">
+            <summary>
+              Looks up a localized string similar to 82100, Drohobych.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AuthorInformation">
+            <summary>
+              Looks up a localized string similar to Author information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.AuthorName">
+            <summary>
+              Looks up a localized string similar to Dmytro Novak.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.BuildingName">
+            <summary>
+              Looks up a localized string similar to Building name.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.BuildingNameTooltip">
+            <summary>
+              Looks up a localized string similar to Required for other users.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.City">
+            <summary>
+              Looks up a localized string similar to City.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.CityTooltip">
+            <summary>
+              Looks up a localized string similar to Its required fore future filtering information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Company_description">
+            <summary>
+              Looks up a localized string similar to The blind are not blind.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Contact">
+            <summary>
+              Looks up a localized string similar to Contact us.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.CoordinatesFromMap">
+            <summary>
+              Looks up a localized string similar to Coordinates from map.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.CoordinatesFromMapTooltip">
+            <summary>
+              Looks up a localized string similar to Zoom map to preffered location and add marker. Its required to show to users existing markers.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Country">
+            <summary>
+              Looks up a localized string similar to Country.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.CountryTooltip">
+            <summary>
+              Looks up a localized string similar to Its required for future filtering information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.DateTimeMonthArray">
+            <summary>
+              Looks up a localized string similar to &quot;January&quot;, &quot;February&quot;, &quot;March&quot;,
+                       &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;,
+                       &quot;August&quot;, &quot;September&quot;, &quot;October&quot;,
+                       &quot;November&quot;, &quot;December&quot;.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Details">
+            <summary>
+              Looks up a localized string similar to Details.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.DetailsTooltip">
+            <summary>
+              Looks up a localized string similar to Details for more info about sensor location or additional info.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.EmailTooltip">
+            <summary>
+              Looks up a localized string similar to We send you copy of form for sensor with with key and instructions.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ErrorWhileLoadingMap">
+            <summary>
+              Looks up a localized string similar to Error While Loading map.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Feedback">
+            <summary>
+              Looks up a localized string similar to Feedback.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackAddFail">
+            <summary>
+              Looks up a localized string similar to Sending error.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackAddSuccess">
+            <summary>
+              Looks up a localized string similar to Feedback was successfuly received.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackDetailsName">
+            <summary>
+              Looks up a localized string similar to Your idea/proposition etc...
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackDetailsTooltip">
+            <summary>
+              Looks up a localized string similar to Details for more info about sensor location or additional info.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackEmailTooltip">
+            <summary>
+              Looks up a localized string similar to If you want, we send request status on this email.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackForm">
+            <summary>
+              Looks up a localized string similar to Feedback form.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackFormText">
+            <summary>
+              Looks up a localized string similar to Here you can leave recomendations, ask a question or just say &quot;thank you&quot;, or no:)..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackInformation">
+            <summary>
+              Looks up a localized string similar to Feedback information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.FeedbackPlaceholder">
+            <summary>
+              Looks up a localized string similar to Hi. I think....
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.GeolocationError">
+            <summary>
+              Looks up a localized string similar to Error: The Geolocation service failed..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.GeolocationSuppportError">
+            <summary>
+              Looks up a localized string similar to Error: Your browser doesn\&apos;t support geolocation..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Home">
+            <summary>
+              Looks up a localized string similar to Home.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Instruction">
+            <summary>
+              Looks up a localized string similar to Instruction.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Language">
+            <summary>
+              Looks up a localized string similar to Language.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.LearnMore">
+            <summary>
+              Looks up a localized string similar to Learn more.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.LocationFromMap">
+            <summary>
+              Looks up a localized string similar to Location from map.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.LocationFromMapTooltip">
+            <summary>
+              Looks up a localized string similar to Zoom map to preffered location and add marker. Its required to show to users existing markers.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.LocationInformation">
+            <summary>
+              Looks up a localized string similar to Location information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MainPageMessage">
+            <summary>
+              Looks up a localized string similar to Blind people are not blind now. Now, there is a wonderful solution that will simplify the lives of blind people and help them get around in the premises.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MainWarning">
+            <summary>
+              Looks up a localized string similar to The resource is under development, contains errors and no refined functionality..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Map">
+            <summary>
+              Looks up a localized string similar to Map.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerAddress">
+            <summary>
+              Looks up a localized string similar to Address.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerAuthor">
+            <summary>
+              Looks up a localized string similar to Author.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerDetails">
+            <summary>
+              Looks up a localized string similar to Details.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerLocation">
+            <summary>
+              Looks up a localized string similar to Building name.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerTapAddress">
+            <summary>
+              Looks up a localized string similar to Full marker address.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerTapCoordinates">
+            <summary>
+              Looks up a localized string similar to Coordinates.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerTapMsg">
+            <summary>
+              Looks up a localized string similar to Marker details for new sensor.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerTapTooltip">
+            <summary>
+              Looks up a localized string similar to coordinates and full address will be dublicated to \&apos;add sensor\&apos; form below.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.MarkerText">
+            <summary>
+              Looks up a localized string similar to Sensor text.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Name">
+            <summary>
+              Looks up a localized string similar to Name.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.NameTooltip">
+            <summary>
+              Looks up a localized string similar to To know who add sensor.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Note">
+            <summary>
+              Looks up a localized string similar to Note.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.NoteText">
+            <summary>
+              Looks up a localized string similar to click on icons for tooltip.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.PageNotFoundLeaveFeedback">
+            <summary>
+              Looks up a localized string similar to Leave feedback.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.PageNotFoundMsg">
+            <summary>
+              Looks up a localized string similar to Oh, somehow, it seems the page you are trying to open is no longer available or moved to a new address..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.PageNotFoundPropositions">
+            <summary>
+              Looks up a localized string similar to If you are certain that something went wrong and the page should be displayed on request, leave us feedback with details of your actions. We will try to fix the problem..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Phone">
+            <summary>
+              Looks up a localized string similar to Phone.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.RequestStatus">
+            <summary>
+              Looks up a localized string similar to I want a feedback from you about my request status.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.RequiredFields">
+            <summary>
+              Looks up a localized string similar to required fields.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ReturnUp">
+            <summary>
+              Looks up a localized string similar to Click to return on the top page.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Send">
+            <summary>
+              Looks up a localized string similar to Send.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorAdded">
+            <summary>
+              Looks up a localized string similar to Sensor were added successfuly..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorInformation">
+            <summary>
+              Looks up a localized string similar to Sensor information.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorMAC">
+            <summary>
+              Looks up a localized string similar to Sensor MAC.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorMACTooltip">
+            <summary>
+              Looks up a localized string similar to MAC address is required for binding your data to your sensor, information about device MAC address you can find  on instruction page.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorText">
+            <summary>
+              Looks up a localized string similar to Sensor text.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.SensorTextTooltip">
+            <summary>
+              Looks up a localized string similar to Required for playing this text to blid peoples.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ServerErrorLeaveFeedback">
+            <summary>
+              Looks up a localized string similar to Leave feedback.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ServerErrorMsg">
+            <summary>
+              Looks up a localized string similar to Oh, somehow, it seems we had a problem with the server while processing our request..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.ServerErrorPropositions">
+            <summary>
+              Looks up a localized string similar to It will be nice and easier for us to fix the error if you leave a feedback with details about how you encountered an error..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Submit">
+            <summary>
+              Looks up a localized string similar to Submit sensor info.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.TooltipMsg">
+            <summary>
+              Looks up a localized string similar to click on icons for tooltip.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.UniversityAddress">
+            <summary>
+              Looks up a localized string similar to 79013, Lviv, Stepana Bandery St, 12.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.UniversityName">
+            <summary>
+              Looks up a localized string similar to Lviv Polytechnic National University.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.UnknownErrorLeaveFeedback">
+            <summary>
+              Looks up a localized string similar to Leave feedback.
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.UnknownErrorMsg">
+            <summary>
+              Looks up a localized string similar to Oops, there was an unknown error..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.UnknownErrorPropositions">
+            <summary>
+              Looks up a localized string similar to It will be nice and easier for us to fix the error if you leave a feedback with details about how you encountered an error..
+            </summary>
+        </member>
+        <member name="P:BNB.Resources.Resource.Warning">
+            <summary>
+              Looks up a localized string similar to Warning!.
+            </summary>
+        </member>
+    </members>
+</doc>

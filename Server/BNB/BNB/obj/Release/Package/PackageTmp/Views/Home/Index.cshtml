@@ -1,0 +1,483 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div id="descriptionArea" class="jumbotron">
+    <h2>BNB Project</h2>
+    <p class="lead">@BNB.Resources.Resource.MainPageMessage</p>
+    <p><a href="Home/Instruction" class="btn btn-primary btn-lg">@BNB.Resources.Resource.LearnMore &raquo;</a></p>
+</div>
+
+<style>
+    /* Set the size of the div element that contains the map */
+    #map {
+        height: 400px; /* The height is 400 pixels */
+        width: 100%; /* The width is the width of the web page */
+    }
+
+    #snackbar {
+        visibility: hidden;
+        min-width: 250px;
+        margin-left: -125px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+    }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+    -webkit-keyframes fadein {
+        from
+
+    {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    }
+
+    -keyframes fadein {
+        from
+
+    {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    }
+
+    -webkit-keyframes fadeout {
+        from
+
+    {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+
+    }
+
+    -keyframes fadeout {
+        from
+
+    {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+    }
+</style>
+
+
+
+<div class="panel-group" id="addSensorInfoMasterDiv">
+    <h3>@BNB.Resources.Resource.AddingNewSensorInfo</h3>
+    <p><i class="fa fa-asterisk text-danger">*</i> - @BNB.Resources.Resource.RequiredFields</p>
+    <p><i class="fa fa-asterisk text-danger">@BNB.Resources.Resource.Note:</i> - @BNB.Resources.Resource.TooltipMsg</p>
+    <div class="panel panel-default">
+        <div class="panel-heading">@BNB.Resources.Resource.AuthorInformation</div>
+        <div class="panel-body">
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Name</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.NameTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="userNameInput" type="text" class="form-control" name="userNameInput" placeholder="@BNB.Resources.Resource.Name" required>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Phone</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                    <input id="userPhoneInput" type="tel" class="form-control" name="userPhoneInput" placeholder="@BNB.Resources.Resource.Phone">
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Email</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.EmailTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input id="userEmailInput" type="email" class="form-control" name="userEmailInput" placeholder="Email" required>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">@BNB.Resources.Resource.LocationInformation</div>
+        <div class="panel-body">
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.City</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.CityTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                    <input id="locateCityInput" type="text" class="form-control" name="locateCityInput" placeholder="@BNB.Resources.Resource.City" required>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Country</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.CountryTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-globe"></i></span>
+                    <input id="locateCountryInput" type="text" class="form-control" name="locateCountryInput" placeholder="@BNB.Resources.Resource.Country" required>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.LocationFromMap</label>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.LocationFromMapTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                    <input id="locateFromMapInput" type="text" class="form-control" readonly="readonly" name="locateFromMapInput" placeholder="@BNB.Resources.Resource.LocationFromMap">
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.CoordinatesFromMap</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.CoordinatesFromMapTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+                    <input id="locateCoordFromMapInput" type="text" class="form-control" readonly="readonly" name="locateCoordFromMapInput" placeholder="@BNB.Resources.Resource.CoordinatesFromMap" required>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-default">
+        <div class="panel-heading">@BNB.Resources.Resource.SensorInformation</div>
+        <div class="panel-body">
+
+            <div class="col-md-4 mb-3">
+                
+                <div class="row-md-4 mb-3">
+
+                    <label>@BNB.Resources.Resource.BuildingName</label><i class="fa fa-asterisk text-danger">*</i>
+                    <div class="input-group">
+                        <span title="@BNB.Resources.Resource.BuildingNameTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="sensorBuildingNameInput" type="text" class="form-control" name="sensorBuildingNameInput" placeholder="@BNB.Resources.Resource.BuildingName" required>
+                    </div>
+                    <p></p>
+                    <label>@BNB.Resources.Resource.SensorMAC</label><i class="fa fa-asterisk text-danger">*</i>
+                    <div class="input-group">
+                        <span title="@BNB.Resources.Resource.SensorMACTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                        <input id="sensorMACInput" type="text" class="form-control" name="sensorMACInput" placeholder="@BNB.Resources.Resource.SensorMAC" required>
+                    </div>
+                </div>
+            </div>
+         
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Details</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.DetailsTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                    <textarea id="sensorDetailsInput" style="min-height:120px; min-width:280px;" class="form-control" name="sensorDetailsInput" placeholder="@BNB.Resources.Resource.Details" rows="3" required></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.SensorText</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.SensorTextTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                    <textarea id="sensorTextInput" style="min-height:120px; min-width:280px; " class="form-control" name="sensorTextInput" placeholder="@BNB.Resources.Resource.SensorText" rows="3" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-default btn-lg btn-primary pull-right" id="sendButton" onsubmit="return false;" onclick="sendSensorData()" style="margin:10px;">
+        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> @BNB.Resources.Resource.Submit
+    </button>
+</div>
+
+
+<div id="snackbar"><label id="snackbarLBL"></label></div>
+<div id="map" class="mw-100 h-100 d-inline-block"></div>
+
+<p></p>
+<p></p>
+
+
+<script type="text/javascript">
+       //required fields
+    var userNameInput,
+        userPhoneInput,
+        userEmailInput,
+        locateCityInput,
+        locateCountryInput,
+        locateCoordFromMapInput,
+        locateFromMapInput,
+        sensorBuildingNameInput,
+        sensorDetailsInput,
+        sensorTextInput,
+        sensorMACInput;
+
+        function sendSensorData() {
+            userNameInput = $("input#userNameInput").val();
+            userPhoneInput = $("input#userPhoneInput").val();
+            userEmailInput = $("input#userEmailInput").val();
+            locateCityInput = $("input#locateCityInput").val();
+            locateCountryInput = $("input#locateCountryInput").val();
+            locateCoordFromMapInput = $("input#locateCoordFromMapInput").val();
+            sensorBuildingNameInput = $("input#sensorBuildingNameInput").val();
+            sensorDetailsInput = $("textarea#sensorDetailsInput").val();
+            sensorTextInput = $("textarea#sensorTextInput").val();
+            locateFromMapInput = $("input#locateFromMapInput").val(); 
+            sensorMACInput = $("input#sensorMACInput").val();
+
+            if (userNameInput.length > 0 && userEmailInput.length > 0 && locateCityInput.length > 0 && locateCountryInput.length > 0 &&
+                locateCoordFromMapInput.length > 0 && sensorBuildingNameInput.length > 0 && sensorMACInput.length>0 && sensorDetailsInput.length > 0 && sensorTextInput.length > 0) {
+                sendSensorPostRequest();
+            } else {
+
+                showSnackBar("@BNB.Resources.Resource.AllFieldsRequired");
+            }
+
+        }
+
+    function init() {
+       $.ajax({
+         url: '@Url.Action("GetMapMarkers", "Api")',
+  success: function(data){
+
+      initMap(data);
+  },
+           error: function (xhr, ajaxOptions, thrownError) {
+
+               showSnackBar("@BNB.Resources.Resource.ErrorWhileLoadingMap");
+                }
+  });
+    }
+
+    var map, infoWindow;
+    var singleMarker;
+    function initMap(data) {
+
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 49.838867, lng: 24.0250223 },
+            zoom: 13
+        });
+        infoWindow = new google.maps.InfoWindow;
+        google.maps.event.addListener(map, 'click', function (evt) {
+            addSingleMarker(evt.latLng);
+        });
+
+        var markers = data.map(function (item, i) {
+            var location = item.Location.LCoordFromMap.split(' ');
+                var marker = new google.maps.Marker({
+                    position: { lat: parseFloat(location[0]), lng: parseFloat(location[2]) },
+                    title: item.SName,
+                    map: map
+                });
+
+                google.maps.event.addListener(marker, 'click', function (e) {
+
+                    infoWindow.setContent(
+      '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h5 id="firstHeading" class="firstHeading">@BNB.Resources.Resource.MarkerLocation:' + item.SName + '</h5>' +
+                        '<div id="bodyContent">' +
+                        '<p><b>@BNB.Resources.Resource.MarkerAddress:</b> ' + item.Location.LFromMap + 
+                        '<p><b>@BNB.Resources.Resource.MarkerDetails:</b> ' + item.SDetails +
+                        '<p><b>@BNB.Resources.Resource.MarkerText:</b> ' + item.SText +
+                        '<p align=\'right\'><b>@BNB.Resources.Resource.MarkerAuthor:</b> ' + item.Author.AName + '(' + item.Author.AEmail + ')' +
+                        '<p align=\'right\'>' + formatDate(item.SCreateDate) +
+                        '</div>' +
+                        '</div>');
+                    infoWindow.open(map, marker);
+                });
+                return marker;
+        });
+
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            { imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m' });
+
+
+        // Try HTML5 geolocation.
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+
+                infoWindow.setPosition(pos);
+                infoWindow.setContent('Location found.');
+                infoWindow.open(map);
+                map.setCenter(pos);
+            }, function () {
+                handleLocationError(true, infoWindow, map.getCenter());
+            });
+        } else {
+            // Browser doesn't support Geolocation
+            handleLocationError(false, infoWindow, map.getCenter());
+        }
+    }
+
+
+    function addSingleMarker(latLng) {
+        new google.maps.Geocoder().geocode({ 'latLng': latLng }, function (results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                //console error in js because in first boot coordinates is empty
+                document.getElementById('locateFromMapInput').value = results[0].formatted_address;
+                document.getElementById('locateCoordFromMapInput').value = latLng.lat() + '  ' + latLng.lng();
+
+        if (singleMarker) {
+            singleMarker.setPosition(latLng);
+        } else {
+            singleMarker = new google.maps.Marker({
+                position: latLng,
+                map: map
+            });
+                }
+            }
+
+
+        google.maps.event.addListener(singleMarker, 'click', function (e) {
+
+
+                    infoWindow.setContent(
+                        '<div id="siteNotice">' +
+                        '</div>' +
+                        '<h5 id="firstHeading" class="firstHeading">@BNB.Resources.Resource.MarkerTapMsg </h5>' +
+                        '<div id="bodyContent">' +
+                        '<p><b>@BNB.Resources.Resource.MarkerTapAddress :</b> ' + results[0].formatted_address +
+                        '<p><b>@BNB.Resources.Resource.MarkerTapCoordinates:</b> ' + latLng +
+                        '<p align=\'right\'><i>@BNB.Resources.Resource.MarkerTapTooltip</i> ' +
+                        '</div>'
+                    );
+                    infoWindow.open(map, singleMarker);
+            });
+        });
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+            '@BNB.Resources.Resource.GeolocationError' :
+            '@BNB.Resources.Resource.GeolocationSuppportError');
+        infoWindow.open(map);
+    }
+
+    function showSnackBar(message) {
+        document.getElementById('snackbarLBL').innerHTML = message;
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+        function sendSensorPostRequest() {
+            //var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+            var currentdate = new Date(); 
+            ////JSON data
+            //var dataType = 'application/json; charset=utf-8';
+            var data = {
+                SKey: sensorMACInput,
+                SName: sensorBuildingNameInput,
+                SDetails: sensorDetailsInput,
+                SText: sensorTextInput,
+                SCreateDate: currentdate,
+                SLastChangeDate: currentdate,
+                Author: {
+                    AName: userNameInput,
+                    APhone: userPhoneInput,
+                    AEMail: userEmailInput
+                },
+                Location: {
+                    LCity: locateCityInput,
+                    LCountry: locateCountryInput,
+                    LFromMap: locateFromMapInput,
+                    LCoordFromMap: locateCoordFromMapInput
+                }
+            }
+
+
+            console.log('Submitting form...');
+            var postData = JSON.stringify(data);
+
+                $.ajax({
+                    url: '@Url.Action("AddSensorInfo", "Home")',
+                    type: 'post',
+                    contentType: "application/json;",
+                    dataType: 'json',
+                    setTimeout: 1000,
+                    data: postData,
+                    success: function (result) {
+                        showSnackBar("@BNB.Resources.Resource.SensorAdded");
+                        document.getElementById('userNameInput').value  = '';
+                        document.getElementById('userPhoneInput').value = '';
+                        document.getElementById('userEmailInput').value  = '';
+                        document.getElementById('locateCityInput').value = '';
+                        document.getElementById('locateCountryInput').value = '';
+                        document.getElementById('locateCoordFromMapInput').value = '';
+                        document.getElementById('sensorBuildingNameInput').value = '';
+                        document.getElementById('sensorMACInput').value = '';
+                        document.getElementById('sensorDetailsInput').value = '';
+                        document.getElementById('sensorTextInput').value  = '';
+                        document.getElementById('locateFromMapInput').value  = '';
+                    },
+
+                    error: function (xhr, resp, text) {
+                        showSnackBar("@BNB.Resources.Resource.AddSensorError" + resp["error"]+ xhr + " " + resp + " " + text);
+                    }
+                }
+            );
+
+
+
+    }
+
+    function formatDate(item) {
+         
+        var monthNames = [
+           @Html.Raw(@BNB.Resources.Resource.DateTimeMonthArray)
+            
+        ];
+        var date = new Date(item);
+        var day = date.getDate();
+        var monthIndex = date.getMonth();
+        var year = date.getFullYear();
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+
+        return day + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + hour + ':' + minutes;
+    }
+
+</script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDJOZd-P3bAJXBAYtfryQT_GTv61uRehMs&callback=init">
+</script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+
