@@ -5,7 +5,7 @@
 <div id="descriptionArea" class="jumbotron">
     <h2>BNB Project</h2>
     <p class="lead">@BNB.Resources.Resource.MainPageMessage</p>
-    <p><a href="Home/Instruction" class="btn btn-primary btn-lg">@BNB.Resources.Resource.LearnMore &raquo;</a></p>
+    <p><a href="https://github.com/dimka14101/bnb/raw/master/BNB.apk" target="_blank" class="btn btn-primary btn-lg">@BNB.Resources.Resource.LearnMore &raquo;</a></p>
 </div>
 
 <style>
@@ -298,10 +298,25 @@
                     map: map
                 });
 
+
+  
+
                 google.maps.event.addListener(marker, 'click', function (e) {
 
+                    $("input#userNameInput").val(item.Author.AName);
+                    $("input#userPhoneInput").val(item.Author.APhone);
+                    $("input#userEmailInput").val(item.Author.AEmail);
+                    $("input#locateCityInput").val(item.Location.LCity);
+                    $("input#locateCountryInput").val(item.Location.LCountry);
+                    $("input#locateCoordFromMapInput").val(item.Location.LCoordFromMap);
+                    $("input#sensorBuildingNameInput").val(item.SName);
+                    $("textarea#sensorDetailsInput").val(item.SDetails);
+                    $("textarea#sensorTextInput").val(item.SText);
+                    $("input#locateFromMapInput").val(item.Location.LFromMap);
+                    $("input#sensorMACInput").val(item.SKey);
+
                     infoWindow.setContent(
-      '<div id="siteNotice">' +
+                        '<div id="siteNotice">' +
                         '</div>' +
                         '<h5 id="firstHeading" class="firstHeading">@BNB.Resources.Resource.MarkerLocation:' + item.SName + '</h5>' +
                         '<div id="bodyContent">' +
@@ -309,7 +324,7 @@
                         '<p><b>@BNB.Resources.Resource.MarkerDetails:</b> ' + item.SDetails +
                         '<p><b>@BNB.Resources.Resource.MarkerText:</b> ' + item.SText +
                         '<p align=\'right\'><b>@BNB.Resources.Resource.MarkerAuthor:</b> ' + item.Author.AName + '(' + item.Author.AEmail + ')' +
-                        '<p align=\'right\'>' + formatDate(item.SCreateDate) +
+                        '<p><b>@BNB.Resources.Resource.CreateSensorDateText:</b>' + formatDate(item.SCreateDate) + '  <b>@BNB.Resources.Resource.ModifiedSensorDateText:</b>' + formatDate(item.SLastChangeDate) +
                         '</div>' +
                         '</div>');
                     infoWindow.open(map, marker);

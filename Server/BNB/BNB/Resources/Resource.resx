@@ -229,7 +229,7 @@
     <value>Language</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Learn more</value>
+    <value>Download app</value>
   </data>
   <data name="LocationFromMap" xml:space="preserve">
     <value>Location from map</value>
@@ -374,5 +374,11 @@
   </data>
   <data name="SensorMACTooltip" xml:space="preserve">
     <value>MAC address is required for binding your data to your sensor, information about device MAC address you can find  on instruction page</value>
+  </data>
+  <data name="CreateSensorDateText" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="ModifiedSensorDateText" xml:space="preserve">
+    <value>Last changes</value>
   </data>
 </root>

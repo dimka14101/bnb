@@ -229,7 +229,7 @@
     <value>Мова</value>
   </data>
   <data name="LearnMore" xml:space="preserve">
-    <value>Дізнатись більше</value>
+    <value>Завантажити застосунок</value>
   </data>
   <data name="LocationFromMap" xml:space="preserve">
     <value>Локація з карти</value>
@@ -371,5 +371,11 @@
   </data>
   <data name="SensorMACTooltip" xml:space="preserve">
     <value>MAC адруса потрібна для прив'язки даих до давача. Детальну інформацію про MAC адресу пристрою можна знайти на сторінці інструкцій</value>
+  </data>
+  <data name="CreateSensorDateText" xml:space="preserve">
+    <value>Створено</value>
+  </data>
+  <data name="ModifiedSensorDateText" xml:space="preserve">
+    <value>Остання зміна</value>
   </data>
 </root>

@@ -241,6 +241,15 @@ namespace BNB.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string CreateSensorDateText {
+            get {
+                return ResourceManager.GetString("CreateSensorDateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &quot;January&quot;, &quot;February&quot;, &quot;March&quot;,
         ///            &quot;April&quot;, &quot;May&quot;, &quot;June&quot;, &quot;July&quot;,
         ///            &quot;August&quot;, &quot;September&quot;, &quot;October&quot;,
@@ -424,7 +433,7 @@ namespace BNB.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Learn more.
+        ///   Looks up a localized string similar to Download app.
         /// </summary>
         public static string LearnMore {
             get {
@@ -564,6 +573,15 @@ namespace BNB.Resources {
         public static string MarkerText {
             get {
                 return ResourceManager.GetString("MarkerText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last changes.
+        /// </summary>
+        public static string ModifiedSensorDateText {
+            get {
+                return ResourceManager.GetString("ModifiedSensorDateText", resourceCulture);
             }
         }
         

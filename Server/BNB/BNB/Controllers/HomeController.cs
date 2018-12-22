@@ -77,11 +77,31 @@ namespace BNB.Controllers
 
             try
             {
-                BNBDB.Sensor.Add(sensor);
-                BNBDB.Location.Add(sensor.Location);
-                BNBDB.Author.Add(sensor.Author);
-                BNBDB.SaveChanges();
+                Sensor sensorInDB = GetSensorByKey(sensor.SKey);
+                if (sensorInDB == null)
+                {
+                    BNBDB.Sensor.Add(sensor);
+                    BNBDB.Location.Add(sensor.Location);
+                    BNBDB.Author.Add(sensor.Author);
+                  
+                }
+                else {
+                    sensorInDB.Author.AName = sensor.Author.AName;
+                    sensorInDB.Author.APhone = sensor.Author.APhone;
+                    sensorInDB.Author.AEmail = sensor.Author.AEmail;
 
+                    sensorInDB.Location.LCity = sensor.Location.LCity;
+                    sensorInDB.Location.LCountry = sensor.Location.LCountry;
+                    sensorInDB.Location.LCoordFromMap = sensor.Location.LCoordFromMap;
+                    sensorInDB.Location.LFromMap = sensor.Location.LFromMap;
+
+                    sensorInDB.SName = sensor.SName;
+                    sensorInDB.SDetails = sensor.SDetails;
+                    sensorInDB.SText = sensor.SText;
+                    sensorInDB.SLastChangeDate = DateTime.Now;
+                }
+
+                BNBDB.SaveChanges();
                 return Json(new { success = sensor.SKey }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
