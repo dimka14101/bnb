@@ -1,0 +1,220 @@
+﻿@{
+    ViewBag.Title = "Feedback";
+}
+
+<div class="panel-group" id="addSensorInfoMasterDiv" style="margin-top:60px;">
+    <h3>@BNB.Resources.Resource.FeedbackForm</h3>
+    <h4>@BNB.Resources.Resource.FeedbackFormText</h4>
+    <p><i class="fa fa-asterisk text-danger">*</i> - @BNB.Resources.Resource.RequiredFields</p>
+    <p><i class="fa fa-asterisk text-danger">@BNB.Resources.Resource.Note:</i> - @BNB.Resources.Resource.NoteText</p>
+    <div class="panel panel-default">
+        <div class="panel-heading">@BNB.Resources.Resource.FeedbackInformation</div>
+        <div class="panel-body">
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Name</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="userNameInput" type="text" class="form-control" name="userNameInput" placeholder="@BNB.Resources.Resource.Name" required>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.Phone</label>
+                <div class="input-group">
+                    <span class="input-group-addon" class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                    <input id="userPhoneInput" type="tel" class="form-control" name="userPhoneInput" placeholder="@BNB.Resources.Resource.Phone">
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>Email</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.FeedbackEmailTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                    <input id="userEmailInput" type="email" class="form-control" name="userEmailInput" placeholder="Email" required>
+                </div>
+            </div>
+
+            <div class="col-md-4 mb-3">
+                <label>@BNB.Resources.Resource.FeedbackDetailsName</label><i class="fa fa-asterisk text-danger">*</i>
+                <div class="input-group">
+                    <span title="@BNB.Resources.Resource.FeedbackDetailsTooltip" data-toggle="tooltip" class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                    <textarea id="feedbackDetails" style="min-height:120px; min-width:280px;" class="form-control" name="feedbackDetails" placeholder="@BNB.Resources.Resource.FeedbackPlaceholder" rows="3" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-3">
+        <div class="checkbox checkbox-primary">
+            <input id="userWantResponce" type="checkbox" checked="">
+            <label for="userWantResponce">
+                @BNB.Resources.Resource.RequestStatus
+            </label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-default btn-lg btn-primary pull-right" id="sendButton" onsubmit="return false;" onclick="sendFeedbackForm()" style="margin:10px;">
+        <span class="glyphicon glyphicon-send" aria-hidden="true"></span> @BNB.Resources.Resource.Send
+    </button>
+</div>
+<p style="margin:150px"></p>
+
+
+    <div id="snackbar"><label id="snackbarLBL"></label></div>
+
+    <style>
+        #snackbar {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+            #snackbar.show {
+                visibility: visible;
+                -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+
+        .checkbox {
+            padding-left: 20px;
+        }
+
+            .checkbox label {
+                display: inline-block;
+                vertical-align: middle;
+                position: relative;
+                padding-left: 5px;
+            }
+
+                .checkbox label::before {
+                    content: "";
+                    display: inline-block;
+                    position: absolute;
+                    width: 17px;
+                    height: 17px;
+                    left: 0;
+                    margin-left: -20px;
+                    border: 1px solid #cccccc;
+                    border-radius: 3px;
+                    background-color: #fff;
+                    -webkit-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                    -o-transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                    transition: border 0.15s ease-in-out, color 0.15s ease-in-out;
+                }
+
+                .checkbox label::after {
+                    display: inline-block;
+                    position: absolute;
+                    width: 16px;
+                    height: 16px;
+                    left: 0;
+                    top: 0;
+                    margin-left: -20px;
+                    padding-left: 3px;
+                    padding-top: 1px;
+                    font-size: 11px;
+                    color: #555555;
+                }
+
+            .checkbox input[type="checkbox"]:focus + label::before {
+                outline: thin dotted;
+                outline: 5px auto -webkit-focus-ring-color;
+                outline-offset: -2px;
+            }
+
+            .checkbox input[type="checkbox"]:checked + label::after {
+                font-family: 'FontAwesome';
+                content: "✔";
+            }
+
+        .checkbox-primary input[type="checkbox"]:checked + label::before {
+            background-color: #428bca;
+            border-color: #428bca;
+        }
+
+        .checkbox-primary input[type="checkbox"]:checked + label::after {
+            color: #fff;
+        }
+    </style>
+
+    <script>
+    var userNameInput,
+        userPhoneInput,
+        userEmailInput,
+        feedbackDetails,
+        userWantResponce;
+
+    function sendFeedbackForm() {
+        userNameInput = $("input#userNameInput").val();
+        userPhoneInput = $("input#userPhoneInput").val();
+        userEmailInput = $("input#userEmailInput").val();
+        feedbackDetails = $("textarea#feedbackDetails").val();
+        userWantResponce = document.getElementById("userWantResponce").checked;
+
+        if (userNameInput.length > 0 && userPhoneInput.length > 0 && userEmailInput.length > 0 && feedbackDetails.length > 0) {
+            sendSensorPostRequest();
+        } else {
+            showSnackBar("@BNB.Resources.Resource.AllFieldsRequired");
+        }
+
+    }
+
+      function showSnackBar(message) {
+        document.getElementById('snackbarLBL').innerHTML = message;
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+        function sendSensorPostRequest() {
+            //var dataType = 'application/x-www-form-urlencoded; charset=utf-8';
+            var currentdate = new Date(); 
+            ////JSON data
+            //var dataType = 'application/json; charset=utf-8';
+            var data = {
+                FUName: userNameInput,
+                FUPhone: userPhoneInput,
+                FUEMail: userEmailInput,
+
+                FUFeedbackDetail: feedbackDetails,
+                FUNeedResponce: userWantResponce,
+
+                FCreateDate: currentdate
+            }
+
+            console.log('Submitting form...');
+            var postData = JSON.stringify(data);
+
+                $.ajax({
+                    url: '@Url.Action("AddUserFeedback", "Home")',
+                    type: 'post',
+                    contentType: "application/json;",
+                    dataType: 'json',
+                    setTimeout: 1000,
+                    data: postData,
+                    success: function (result) {
+                        showSnackBar("@BNB.Resources.Resource.FeedbackAddSuccess");
+                        document.getElementById('userNameInput').value  = '';
+                        document.getElementById('userPhoneInput').value = '';
+                        document.getElementById('userEmailInput').value  = '';
+                        document.getElementById('feedbackDetails').value = '';
+                        document.getElementById('userWantResponce').checked = false;
+                    },
+
+                    error: function (xhr, resp, text) {
+                            showSnackBar("@BNB.Resources.Resource.FeedbackAddFail");
+                    }
+                }
+            );
+        }
+
+
+    </script>

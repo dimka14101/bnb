@@ -1,0 +1,164 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="~/images/main_logo.png">
+
+    <title>@ViewBag.Title - BNB Project</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <style>
+        .back-to-top {
+            cursor: pointer;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+        }
+
+        .alert {
+            position: absolute;
+            z-index:9999;
+        }
+    </style>
+
+    <script>
+
+
+        $(document).ready(function () {
+          $('#goToMap').click(function () {
+            //window.location = '/home/index#map';
+            var map = document.getElementById("map");
+              if (map) {
+                  var elmnt = document.getElementById("sensorBuildingNameInput");
+                  elmnt.scrollIntoView();
+              } else {
+              var url = $("#RedirectTo").val();
+                  window.location.href = url;
+              }
+            });
+
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+            // scroll body to 0px on click
+            $('#back-to-top').click(function () {
+                $('#back-to-top').tooltip('hide');
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 800);
+                return false;
+            });
+
+            $('#back-to-top').tooltip('show');
+
+            $(".alert").delay(200).addClass("in").fadeOut(3500);
+        });
+    </script>
+</head>
+
+<body>
+    @Html.Hidden("RedirectTo", Url.Action("Index", "Home"));
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+
+        <div class="alert alert-info">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <strong>Увага! </strong>
+                Цей ресурс волонтерський, призначений допомагати незрячим людям або людям з вадами зору. Не містить жодного захисту, а вся інформація є відкритою та доступною для зміни.
+                Будь ласка, не вносьте не правдиву інформацію, не видаляйте та не змінюйте наявну інформацію без вагомих причин. Це може спричинити проблеми у інших людей при користуванні ресурсом.
+                <strong>Дякуємо! </strong>
+            </div>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img class="pull-left" src="~/images/main_logo.png" alt="" style="width:40px;height:40px;">
+                @Html.ActionLink("BNB V.17.12.18 23:13", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @* <a class="navbar-brand" href="#descriptionArea">BNB V.08.08.18 00:56</a>*@
+                @*<ul class="nav navbar-nav navbar-left navbar-brand">
+                    <li id="goToMap">@BNB.Resources.Resource.Map</li>
+                </ul>*@
+            </div>
+            <div class="navbar-collapse collapse">
+
+                @* @Html.Partial("_LoginPartial")*@
+                <ul class="nav navbar-nav navbar-right">
+                    @*<li>@Html.ActionLink(BNB.Resources.Resource.Instruction, "Instruction", "Home")</li>*@
+                    <li>@Html.ActionLink(BNB.Resources.Resource.Feedback, "Feedback", "Home")</li>
+                    <li class="navbar-nav text-right">
+                        <ul class="list-unstyled" style="margin-right:5%">
+                            <li>@Html.ActionLink("EN", "Change", "Home", new { LanguageAbbrevation = "en" }, null)</li>
+                            <li>@Html.ActionLink("UA", "Change", "Home", new { LanguageAbbrevation = "uk" }, null)</li>
+
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-warning fade">
+        <button type="button" class="close" data-dismiss="alert">x</button>
+        <strong>@BNB.Resources.Resource.Warning </strong>
+        @BNB.Resources.Resource.MainWarning 
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    <footer class="page-footer font-small unique-color-dark" style="background-color: #101010;">
+        <div class="container text-center text-md-left mt-5">
+            <div class="row mt-3">
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">BNB - @BNB.Resources.Resource.Company_description</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <img class="" src="~/images/main_logo.png" alt="" style="width:130px;height:130px;">
+                </div>
+
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <h6 class="text-uppercase font-weight-bold">@BNB.Resources.Resource.AboutAuthor</h6>
+                    <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p> @BNB.Resources.Resource.AuthorName </p>
+                    <p> @BNB.Resources.Resource.AuthorAddress </p>
+                    <p> dmytro.s.novak@gmail.com </p>
+                    <p> <a href="https://www.facebook.com/profile.php?id=100001753501356" target="_blank">Facebook</a></p>
+                </div>
+
+                <div class="col-md-5 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <h6 class="text-uppercase font-weight-bold">@BNB.Resources.Resource.AboutUniversity</h6>
+                    <hr class="deep-purple accent-2 mb-2 mt-0 d-inline-block mx-auto" style="width: 60px;">
+                    <p> @BNB.Resources.Resource.UniversityName </p>
+                    <p> @BNB.Resources.Resource.UniversityAddress </p>
+                    <p> coffice@lp.edu.ua </p>
+                    <p> <a href="http://www.lp.edu.ua" target="_blank">www.lp.edu.ua</a></p>
+                    <p> +38 (032) 258-21-11 </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright text-center py-3">
+            © 2018 Copyright:https://github.com/dimka14101/bnb/
+            <a>@Html.ActionLink(BNB.Resources.Resource.ApiMsg, "Index", "Help", new { area = "" }, null)</a>
+            <a href="https://github.com/dimka14101/bnb/" target="_blank">Our GitHub</a>
+        </div>
+    </footer>
+
+
+
+    <a id="back-to-top" href="#" class="btn btn-primary btn-lg back-to-top" role="button" title="@BNB.Resources.Resource.ReturnUp" data-toggle="tooltip" data-placement="left"><span class="glyphicon glyphicon-chevron-up"></span></a>
+
+
+</body>
+</html>
